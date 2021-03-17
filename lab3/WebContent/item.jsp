@@ -1,5 +1,4 @@
 <%@page import="com.item"%>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -13,8 +12,20 @@ if (request.getParameter("itemCode") != null)
  request.getParameter("itemDesc"));
  session.setAttribute("statusMsg", stsMsg);
  }
-%>
     
+else if(request.getParameter("itemId") != null){
+	item itemUpdate = new item();
+	String updateMsg = itemUpdate.updateItem(request.getParameter("itemId"),request.getParameter("itemCode"), request.getParameter("itemName"), request.getParameter("itemPrice"), request.getParameter("itemDesc"));
+	session.setAttribute("updateStatus", updateMsg);
+}
+    
+else if(request.getParameter("itemId") != null){
+	item itemDelete = new item();	
+	String deleteMsg = itemDelete.deleteItem(request.getParameter("itemId"));
+	session.setAttribute("deleteStatus", deleteMsg);
+}
+%>
+  
     
     
 <!DOCTYPE html>
